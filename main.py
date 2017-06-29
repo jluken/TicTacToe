@@ -27,7 +27,7 @@ def display(board, user_sym):
 
 def player_turn(board, user_sym):
     while True:
-        input = raw_input("Where would you like to move? ")
+        input = raw_input("\nWhere would you like to move? ")
         A = 'A' in input or 'a' in input
         B = 'B' in input or 'b' in input
         C = 'C' in input or 'c' in input
@@ -35,7 +35,7 @@ def player_turn(board, user_sym):
         _2 = '2' in input
         _3 = '3' in input
         if (A and B) or (A and C) or (B and C) or (_1 and _2) or (_1 and _3) or (_2 and _3):
-            print "I'm sorry. That was not a valid board space. Please only include one of each column and row."
+            print "\nI'm sorry. That was not a valid board space. Please only include one of each column and row."
             continue
         if A:
             x_val = 0
@@ -44,7 +44,7 @@ def player_turn(board, user_sym):
         elif C:
             x_val = 2
         else:
-            print "I'm sorry. That was not a valid board space. Please include the column letter. "
+            print "\nI'm sorry. That was not a valid board space. Please include the column letter. "
             continue
         if _1:
             y_val = 0
@@ -53,10 +53,10 @@ def player_turn(board, user_sym):
         elif _3:
             y_val = 2
         else:
-            print "I'm sorry. That was not a valid board space. Please include the row number. "
+            print "\nI'm sorry. That was not a valid board space. Please include the row number. "
             continue
         if board[x_val][y_val] != 0:
-            print "That space is already taken, please pick another. "
+            print "\nThat space is already taken, please pick another. "
             continue
         break
 
@@ -71,7 +71,7 @@ def player_turn(board, user_sym):
     return result
 
 def ai_turn(board, user_sym):
-    print "Now it's my turn. "
+    print "\nNow it's my turn. "
     board_options = minimax(board, -1)
 
     move_row = 0
@@ -147,7 +147,7 @@ def check_win(board):
 
 
 def intro():
-    input = raw_input("Welcome to Tic Tac Toe. Would you like to bs Xs or Os? ")
+    input = raw_input("\nWould you like to bs Xs or Os? ")
     while True:
         if input in ['x','X','xs','Xs', 'x\'s', 'X\'s']:
             user_sym = 'X'
@@ -156,7 +156,7 @@ def intro():
             user_sym = 'O'
             break
         else:
-            input = raw_input("That is not a valid input. Would you like to bs Xs or Os? ")
+            input = raw_input("\nThat is not a valid input. Would you like to bs Xs or Os? ")
 
     board = [[0,0,0],[0,0,0],[0,0,0]]
     board_display = display(board, user_sym)
@@ -169,23 +169,25 @@ def intro():
     end(ending)
 
 def end(ending):
+    quit = False
     if ending == 1:
-        finale = "Congratulations! You've won! Press \'r\' to restart, or press \'q\' to quit. "
+        finale = "\nCongratulations! You've won! Press \'r\' to restart, or press \'q\' to quit. "
     elif ending == -1:
-        finale = "Sorry, you lose. Would you like to try again? Press \'r\' to restart, or press \'q\' to quit. "
+        finale = "\nSorry, you lose. Would you like to try again? Press \'r\' to restart, or press \'q\' to quit. "
     else:
-        finale = "It's a draw. Would you like to try again? Press \'r\' to restart, or press \'q\' to quit. "
+        finale = "\nIt's a draw. Would you like to try again? Press \'r\' to restart, or press \'q\' to quit. "
     input = raw_input(finale)
     if input in ['r', 'R']:
         intro()
     elif input in ['q', 'Q']:
         quit = True
     else:
-        while True:
-            input = raw_input("Sorry, that's an invalid entry. Press \'r\' to restart, or press \'q\' to quit. ")
+        while quit == False:
+            input = raw_input("\nSorry, that's an invalid entry. Press \'r\' to restart, or press \'q\' to quit. ")
             if input in ['r', 'R']:
                 intro()
             elif input in ['q', 'Q']:
                 quit = True
 
+print "\nWelcome to Tic Tac Toe."
 intro()
